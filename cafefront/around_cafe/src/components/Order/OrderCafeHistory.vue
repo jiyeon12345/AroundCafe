@@ -38,7 +38,12 @@
                 <span>{{ order.paymentNo }} | </span
                 >{{ order.paymentDate | yyyyMMdd }}
               </div>
-              <OrderCafeBtn v-if="order" :order="order" :role="role" :user="user" />
+              <OrderCafeBtn
+                v-if="order"
+                :order="order"
+                :role="role"
+                :user="user"
+              />
             </div>
             <!-- 내용 -->
             <div>
@@ -93,8 +98,8 @@
                         <div class="order-history-text price">
                           <span>
                             {{ order.totalAmount | pricePoint }} |
-                            {{ order.totalPointAmount | pricePoint
-                            }}<span class="point">P</span> |
+                            {{ order.totalPointAmount | pricePoint }}
+                            <span class="point"> P</span> |
                             {{ order.totalQuantity }}개</span
                           >
                         </div>

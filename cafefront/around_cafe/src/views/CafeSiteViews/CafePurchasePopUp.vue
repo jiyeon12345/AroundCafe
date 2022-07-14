@@ -2,7 +2,7 @@
   <div class="popup">
     <div>
       <div v-if="this.paymentResult === `fail`">
-        <v-icon> mdi-close-box</v-icon>
+        <v-icon> mdi-check-circle</v-icon>
         <h1>결제에 실패하셨습니다</h1>
         <h1>다시 결제 하시겠습니까?</h1>
         <div class="popup-btn">
@@ -13,7 +13,7 @@
     </div>
     <div>
       <div v-if="this.paymentResult === `cancel`">
-        <v-icon> mdi-close-box</v-icon>
+        <v-icon> mdi-check-circle</v-icon>
         <h1>결제를 취소하셨습니다.</h1>
         <div class="popup-btn">
           <v-btn @click="cancelConfirm()">확인</v-btn>

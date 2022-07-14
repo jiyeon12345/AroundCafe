@@ -10,13 +10,17 @@
         </div>
         <div class="col-sm-8 col-md-9 col-lg-9">
           <header>
-            <h1>주문 내역</h1>
+            <h1>주문 리스트</h1>
           </header>
           <template v-if="loading">
             <LoadingSpinner :loading="loading" />
           </template>
           <template v-else>
-            <OrderCafeHistory :orderCafeLists="orderCafeLists" :user="user" role="CAFE"/>
+            <OrderCafeHistory
+              :orderCafeLists="orderCafeLists"
+              :user="user"
+              role="CAFE"
+            />
           </template>
         </div>
       </div>

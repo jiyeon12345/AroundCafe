@@ -1,3 +1,5 @@
+import json
+from urllib import response
 from flask import Blueprint, jsonify, request
 from .MailService import MailService
 
@@ -19,5 +21,5 @@ def verifyEmail():
 def sendInfo():
     info = request.json
     MailService().send_payment_status(info)
-
-    return 200
+    status = 200
+    return jsonify(status)

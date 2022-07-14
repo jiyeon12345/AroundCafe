@@ -109,6 +109,16 @@ export default {
     this.paymentInfo = paymentInfo
     this.memberInfo = memberInfo
     this.totalPaymentAmount = totalPaymentAmount
+
+    if(paymentInfo.paymentStatus === "PAYMENT_CONFIRMED") {
+      const info = {
+        role: "USER",
+        mem_no: paymentInfo.memNo,
+        cafe_no: paymentInfo.cafeNo,
+        status: paymentInfo.paymentStatus,
+      }
+      await axios.post("http://localhost:5000/mail/sendInfo", info)
+    }
   },
   computed: {},
   methods: {

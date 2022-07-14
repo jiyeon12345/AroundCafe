@@ -87,9 +87,11 @@ export default {
       }
       try{
         if (paymentStatus === "PAYMENT_CONFIRMED") {
-          await axios.put(`http://localhost:7777/payment/order/status/${paymentNo}`, data)
-          await this.sendEmail("CAFE_READY")
           alert("주문이 준비중입니다")
+          await Promise.all([
+            axios.put(`http://localhost:7777/payment/order/status/${paymentNo}`, data),
+            // this.sendEmail("CAFE_READY")
+          ])
           this.$router.go()
         } else {
           alert("이미 준비중입니다")
@@ -106,11 +108,13 @@ export default {
         paymentStatus: tmp,
       }
       try {
-        await axios.put(
-          `http://localhost:7777/payment/order/status/${paymentNo}`,
-          data
-        )
-        await this.sendEmail(tmp)
+        await Promise.all([
+          axios.put(
+              `http://localhost:7777/payment/order/status/${paymentNo}`,
+              data
+          ),
+          this.sendEmail(tmp)
+        ])
         alert("음료가 준비되었습니다")
         this.$router.go()
       } catch {
@@ -127,16 +131,18 @@ export default {
       }
       if (paymentStatus === "PAYMENT_CONFIRMED") {
         try {
-          await axios.put(
-            `http://localhost:7777/payment/order/status/${paymentNo}`,
-            data
-          )
-          await this.sendEmail(tmp)
+          await Promise.all([
+            axios.put(
+                `http://localhost:7777/payment/order/status/${paymentNo}`,
+                data
+            ),
+            this.sendEmail(tmp)
+          ])
+          alert("주문이 취소되었습니다")
+          this.$router.go()
         } catch {
           alert("주문취소 실패")
         }
-        alert("주문이 취소되었습니다")
-        this.$router.go()
       }
     },
     goDetails(paymentNo) {

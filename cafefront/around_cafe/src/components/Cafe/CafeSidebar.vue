@@ -87,7 +87,7 @@ export default {
           id: 5,
           icon: "mdi-message-text-outline",
           title: "고객 리뷰",
-          link: "/cafe/review",
+          link: "/cafe/review/list",
         },
         {
           id: 6,

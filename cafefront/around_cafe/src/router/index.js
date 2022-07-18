@@ -20,6 +20,7 @@ import userService from "@/services/userService"
 
 Vue.use(VueRouter)
 
+// 로그인 권한 여부
 const authLogin = (to, from, next) => {
   let validate = userService.getUserInfo()["role"]
   if (validate === "USER") {
@@ -29,8 +30,7 @@ const authLogin = (to, from, next) => {
     alert("로그인이 필요합니다")
   }
 }
-
-//관리자 권한 여부
+// 관리자 권한 여부
 
 const authAdmin = (to, from, next) => {
   let validate = userService.getUserInfo()["role"]
@@ -42,7 +42,7 @@ const authAdmin = (to, from, next) => {
   }
 }
 
-//카페 권한 여부
+// 카페 권한 여부
 const authCafe = (to, from, next) => {
   let validate = userService.getUserInfo()["role"]
   if (validate === "CAFE") {
@@ -135,7 +135,7 @@ const routes = [
     path: "/admin/pw",
     name: "AdminPasswordPage",
     component: () => import("@/views/Admin/AdminPasswordPage.vue"),
-    // beforeEnter: (to, from, next) => authAdmin(to, from, next),
+    beforeEnter: (to, from, next) => authAdmin(to, from, next),
   },
   {
     path: "/admin/AdminUserModifyPage",
@@ -191,12 +191,6 @@ const routes = [
     },
   },
   {
-    path: "/admin/chat",
-    name: "ChatPageAdmin",
-    component: () => import("@/views/Chat/ChatPageAdmin.vue"),
-    beforeEnter: (to, from, next) => authAdmin(to, from, next),
-  },
-  {
     path: "/admin/cafe/sales/menu",
     name: "AdminCafeSalesMenuPage",
     components: {
@@ -247,12 +241,7 @@ const routes = [
     component: () => import("@/views/Cafe/CafeRegisterPage.vue"),
     beforeEnter: (to, from, next) => authCafe(to, from, next),
   },
-  {
-    path: "/cafe/review",
-    name: "CafeReviewListPage",
-    component: () => import("@/views/Cafe/CafeReviewListPage.vue"),
-    beforeEnter: (to, from, next) => authCafe(to, from, next),
-  },
+
   {
     path: "/cafe/modify",
     name: "CafeUserModifyPage",
@@ -291,6 +280,14 @@ const routes = [
     name: "CafePurchasePopUp",
     component: () => import("@/views/CafeSiteViews/CafePurchasePopUp"),
     props: true,
+  },
+  {
+    path: "/cafe/review/list",
+    name: "CafeReviewListPage",
+    components: { default: () => import("@/views/Cafe/CafeReviewListPage") },
+    props: {
+      default: true,
+    },
   },
 
   //Policy 이용약관페이지
@@ -409,14 +406,6 @@ const routes = [
     path: "/cafe/review/modify/:reviewNo",
     name: "CafeReviewModifyPage",
     component: () => import("@/views/Cafe/CafeReviewModifyPage"),
-    props: {
-      default: true,
-    },
-  },
-  {
-    path: "/cafe/review/list",
-    name: "CafeReviewListPage",
-    components: { default: () => import("@/views/Cafe/CafeReviewListPage") },
     props: {
       default: true,
     },

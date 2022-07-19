@@ -1,4 +1,5 @@
 ## 💙AroundCafe
+![슬라이드1](https://user-images.githubusercontent.com/70027022/179713869-a59b393a-df6d-40ba-9ef0-8f595cdffa7d.PNG)
 
 
 ## 💙팀원
@@ -8,7 +9,7 @@
    - <img src="https://img.shields.io/badge/Java-8-3766AB?style=flat"/> on <img src="https://img.shields.io/badge/IntelliJ-3766AB?style=flat"/>
    - <img src="https://img.shields.io/badge/Spring-8-3766AB?style=flat"/> <img src="https://img.shields.io/badge/SpringBoot-2.6.3-3766AB?style=flat"/> <img src="https://img.shields.io/badge/SpringSecurity-5.6.1-3766AB?style=flat"/>
    - <img src="https://img.shields.io/badge/MySql-3766AB?style=flat"/> <img src="https://img.shields.io/badge/JPA-3766AB?style=flat"/>
-   - <img src="https://img.shields.io/badge/Redis-7.0.03766AB?style=flat"/> 
+   - <img src="https://img.shields.io/badge/Redis-7.0.0-3766AB?style=flat"/> 
 
 ## 💙프론트 소개
  * 기술스택

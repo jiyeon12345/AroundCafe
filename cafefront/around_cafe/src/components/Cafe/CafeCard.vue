@@ -72,7 +72,7 @@
                             :data-url="
                               require(`@/assets/cafe/cafeMypage/${img.cafe_img}`)
                             "
-                            :alt="`image${img.cafeImgNo}`"
+                            :alt="`이미지${img.cafeImgNo}`"
                           />
                         </picture>
                       </swiper-slide>

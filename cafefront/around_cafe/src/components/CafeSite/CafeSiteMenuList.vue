@@ -12,18 +12,21 @@
                   v-bind:src="
                     require(`@/assets/cafe/cafeMenu/${item.menu_img}`)
                   "
+                    :alt="`메뉴 이미지${item.menu_no}`"
                 />
               </template>
               <template v-if="item.sold_out == true">
                 <img
                   position="absolute"
                   v-bind:src="require(`@/assets/images/sold_out2.webp`)"
+                  alt="솔드아웃 이미지"
                 />
               </template>
               <template>
                 <img
                   v-if="item.menu_img == null"
                   v-bind:src="require(`@/assets/cafe/cafeMenu/imgNull.png`)"
+                  alt="이미지 없음"
                 />
               </template>
 
@@ -52,7 +55,7 @@
             aria-label="장바구니 담기"
             @click="addToBasket(item)"
           >
-            <i class="icCart"></i>
+            <i class="icCart" aria-hidden=true></i>
           </button>
         </div>
       </li>

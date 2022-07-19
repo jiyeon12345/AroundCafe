@@ -3,7 +3,7 @@
 
 ## 💙백엔드 소개
  * 기술소개
-   - <img src="https://img.shields.io/badge/Java11-#제외색상번호?&logoColor=white">
+   - https://img.shields.io/badge/version-0.0.1-critical.svg
 
    - 
  * 스택

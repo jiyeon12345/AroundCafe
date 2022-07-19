@@ -3,7 +3,7 @@
 
 ## 💙백엔드 소개
  * 기술소개
-   - https://img.shields.io/badge/version-0.0.1-critical.svg
+   - [Generic badge](https://img.shields.io/badge/version-0.0.1-critical.svg)
 
    - 
  * 스택

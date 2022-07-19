@@ -3,11 +3,11 @@
 
 
 ## 💛팀원
-    * #### IN JI YEON
-    * #### LEE TAE HO
-    * #### KIM HEE JIN
-    * #### PARK SUNG BEAN
-    * #### SEKINE YUKI
+    * IN JI YEON
+    * LEE TAE HO
+    * KIM HEE JIN
+    * PARK SUNG BEAN
+    * SEKINE YUKI
     
 ## 💛백엔드 소개
  *  ### 기술스택

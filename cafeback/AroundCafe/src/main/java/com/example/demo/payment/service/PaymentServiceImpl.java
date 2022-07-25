@@ -123,7 +123,7 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentResponse payment2PaymentResponse(Payment payment) {
         if(payment.getPaymentStatus() != PaymentStatus.PAYMENT_READY) {
             PaymentResponse paymentResponse = PaymentResponseMapStruct.instance.toDto(payment);
-            Cafe cafe = cafeRepository.findByCafeNo2(payment.getCafeNo()).orElseThrow(()
+            Cafe cafe = cafeRepository.findByCafeNo(payment.getCafeNo()).orElseThrow(()
                     -> new ResourceNotFoundException("cafe", "cafeNo", payment.getCafeNo()));
 
             if (payment.getMember() != null) {

@@ -12,22 +12,14 @@ import java.util.Optional;
 
 public interface CafeImgRepository extends JpaRepository<CafeImgTable,Long> {
 
-//    @Query(value = "select count(*) from cafe_img_table where cafe_no = :cafe_no", nativeQuery = true)
-//    Optional<Integer> findByCafe_no(@Param("cafe_no") Long cafe_no);
-
     @Query("select count(ci.CafeImgNo) from CafeImgTable ci join ci.cafe c where c.cafeNo = :cafe_no")
     Optional<Integer> findByCafe_no(@Param("cafe_no") Long cafe_no);
 
-//    @Modifying(clearAutomatically = true)
-//    @Query(value = "delete from cafe_img_table where cafe_no = :cafe_no", nativeQuery = true)
-//    public void deleteByCafeNo(@Param("cafe_no") Long cafe_no);
 
     @Modifying(clearAutomatically = true)
     @Query("delete from CafeImgTable ci where ci.cafe in (select c from Cafe c where c.cafeNo = :cafe_no)")
     public void deleteByCafeNo(@Param("cafe_no") Long cafe_no);
 
-//    @Query(value = "select * from cafe_img_table where cafe_no = :cafe_no", nativeQuery = true)
-//    public List<CafeImgTable> CafeImgList(@Param("cafe_no") Long cafe_no);
 
     @Query("select ci from CafeImgTable ci join fetch ci.cafe c where c.cafeNo = :cafe_no")
     public List<CafeImgTable> CafeImgList(@Param("cafe_no") Long cafe_no);

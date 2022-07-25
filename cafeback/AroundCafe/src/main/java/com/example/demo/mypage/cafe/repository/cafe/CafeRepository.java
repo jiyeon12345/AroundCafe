@@ -17,7 +17,7 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 
     @Query("select c from Cafe c join fetch c.memberInfo m where m.memNo = :membNo")
     Optional<Cafe> findByMemberNo(@Param("membNo") Long membNo);
-    
+
     Optional<Cafe> findByCafeNo(@Param("cafeNo") Long cafeNo);
 
 

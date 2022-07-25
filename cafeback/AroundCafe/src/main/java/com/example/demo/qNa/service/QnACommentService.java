@@ -11,12 +11,7 @@ public interface QnACommentService {
 
     public void saveImg(Integer qnaNo, Integer membNo, String fileName);
 
-    public List<String> dateList(Integer qnaNo);
 
     public void deleteComment(Integer qnaCommentNo) throws IOException;
 
-
-//    void saveQna(Integer membNo, QnACommentDto info);
-//
-//    void saveQnaComment(QnACommentDto info);
 }

@@ -62,11 +62,6 @@ public class QnACommentServiceImpl implements QnACommentService{
     }
 
     @Override
-    public List<String> dateList(Integer qnaNo) {
-        return repository.findByDate(qnaNo);
-    }
-
-    @Override
     public void deleteComment(Integer qnaCommentNo) throws IOException {
         log.info("qna comment no : " +qnaCommentNo);
 

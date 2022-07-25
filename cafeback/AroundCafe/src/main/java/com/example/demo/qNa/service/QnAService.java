@@ -16,13 +16,10 @@ public interface QnAService {
 
     public List<QnAComment> readQnA(Integer qnaNo);
 
-    public List<QnA> QnAList(Integer membNo);
 
     public List<QnAResponse> responseQnAList(Integer membNo);
 
     public void deleteQna(Integer qnaNo);
-
-    public QnAComment test(Integer qnaNo);
 
     public List<QnAResponse> responseAdminQnAList(Integer membNo);
 }

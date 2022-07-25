@@ -32,33 +32,17 @@ public class QnAServiceImpl implements QnAService {
     @Autowired
     MemberRepository memberRepository;
 
-    @Autowired
-    CafeRepository cafeRepository;
-
     @Override
     public void includeImgregister(QnADto info, String fileName) {
         Member member = memberRepository.findById(info.getMemNo()).orElseGet(null);
-        Member revceivedNo = memberRepository.findById(info.getReceived_no()).orElseGet(null);
-        QnA qnA = null;
 
-        if(info.getReceived_no() != 0) {
-            qnA = QnA.builder()
-                    .received_no(revceivedNo.getMemNo())
-                    .member(member)
-                    .type(info.getType())
-                    .build();
+        QnA qnA = QnA.builder()
+                .received_no(info.getReceived_no())
+                .member(member)
+                .type(info.getType())
+                .build();
 
-            repository.save(qnA);
-        }else {
-            qnA = QnA.builder()
-                    .received_no(revceivedNo.getMemNo())
-                    .member(member)
-                    .type(info.getType())
-                    .received_name("관리자")
-                    .build();
-            repository.save(qnA);
-        }
-
+        repository.save(qnA);
 
         QnAComment comment = QnAComment.builder()
                 .writer(info.getMemNo())
@@ -74,17 +58,17 @@ public class QnAServiceImpl implements QnAService {
     public void exceptImgRegister(QnADto info) {
         Member member = memberRepository.findById(Long.valueOf(info.getMemNo())).orElseGet(null);
         Member orderMem = null;
+
         if(info.getReceived_no() == null){
             orderMem = memberRepository.findByAdmin().orElseGet(null);
         }else {
             orderMem = memberRepository.findByIdFromCafeNo(info.getReceived_no()).orElseGet(null);
         }
-        QnA qnA = null;
-        qnA = QnA.builder()
+
+        QnA qnA = QnA.builder()
                 .received_no(orderMem.getMemNo())
                 .member(member)
                 .type(info.getType())
-                .received_name(orderMem.getMemNick())
                 .build();
         repository.save(qnA);
 
@@ -94,7 +78,6 @@ public class QnAServiceImpl implements QnAService {
                 .content(info.getContent())
                 .qnA(qnA)
                 .build();
-
         commentRepository.save(comment);
 
     }
@@ -102,12 +85,6 @@ public class QnAServiceImpl implements QnAService {
     @Override
     public List<QnAComment> readQnA(Integer qnaNo) {
         return commentRepository.findByQnA(qnaNo);
-    }
-
-    @Override
-    public List<QnA> QnAList(Integer membNo) {
-        Member member = memberRepository.findById(Long.valueOf(membNo)).orElseGet(null);
-        return repository.findByMemberInfo(member);
     }
 
     @Override
@@ -145,7 +122,9 @@ public class QnAServiceImpl implements QnAService {
 
     private List<QnAResponse> getQnaList(List<QnA> qnAS, Member member) {
         List<QnAResponse> comments = new ArrayList<>();
-        if(qnAS.size() > 0){
+        if(qnAS.size() ==  0) {
+            return null;
+        }else {
             for(QnA findQna : qnAS) { //qna에 대한 리스트에서 for문을 돌면서 내용을 찾음
                 Member orderMem = null;
                 if(findQna.getReceived_no() == member.getMemNo()){
@@ -170,24 +149,14 @@ public class QnAServiceImpl implements QnAService {
                 comments.add(response);
             }
             return comments;
-        }else return null;
+        }
     }
 
 
     @Override
     public void deleteQna(Integer qnaNo) {
         commentRepository.deleteAllByQnA(Long.valueOf(qnaNo));
-        log.info("delete qna comment ");
-
         repository.deleteAllById(Long.valueOf(qnaNo));
-        log.info("delete qna no : " + qnaNo);
 
     }
-
-    @Override
-    public QnAComment test(Integer qnaNo) {
-        QnA qnA = repository.findById(Long.valueOf(qnaNo)).orElseGet(null);
-        return commentRepository.findByRecentComment(qnA).orElseGet(null);
-    }
-
 }

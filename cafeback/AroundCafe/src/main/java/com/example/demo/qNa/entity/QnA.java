@@ -50,8 +50,7 @@ public class QnA {
     private Set<QnAComment> comments = new HashSet<>();
 
     @Builder
-    public QnA (Long received_no, Member member, String type, String received_name,
-                String received_img){
+    public QnA (Long received_no, Member member, String type){
         this.received_no = received_no;
         memberInfo = member;
         this.type = type;

@@ -118,11 +118,11 @@ export default {
         })
     },
     findList() {
-      let memNo = this.user.memNo
+      let cafeNo = this.$store.state.user.cafeNo
       let cafe_name = this.modi_name
 
       axios
-        .get(`http://localhost:7777/menu/findMenu/${memNo}/${cafe_name}`)
+        .get(`http://localhost:7777/menu/findMenu/${cafeNo}/${cafe_name}`)
         .then((res) => {
           if (res.data.length > 0) {
             this.fileterArray = res.data

@@ -9,31 +9,28 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface MenuRepository extends JpaRepository<CafeMenu, Long> {
-    @Transactional
-    @Query(value = "select * from cafe_menu where cafe_no = :cafeNo order by menu_no desc", nativeQuery = true)
+    @Query("select cm from CafeMenu cm join fetch cm.cafe c where c.cafeNo = :cafeNo order by cm.menu_no desc")
     public List<CafeMenu> findByCafeNo(@Param("cafeNo") Long cafeNo);
 
-    @Transactional
-    @Query(value = "select count(*) from cafe_menu where signature = 1 and cafe_no =:checkCafeNo", nativeQuery = true)
-    public Integer countSignature(@Param("checkCafeNo") Long checkCafeNo);
+    @Query("select count(cm.menu_no) from CafeMenu cm where cm.signature = true " +
+            "and cm.cafe = :cafe")
+    Optional<Integer> countSignature(@Param("cafe") Cafe cafe);
 
-    @Transactional
-    @Query(value = "select * from cafe_menu where signature = 1", nativeQuery = true)
+    @Query("select cm from CafeMenu cm where cm.signature = true")
     public List<CafeMenu> findBySignatureTrue();
 
-    @Transactional
-    @Query(value = "select * from cafe_menu where sold_out = 1", nativeQuery = true)
+    @Query("select cm from CafeMenu cm where cm.sold_out = true")
     public List<CafeMenu> findBySoldTrue();
 
     @Transactional
     @Modifying
-    @Query(value = "delete from cafe_menu where cafe_no = cafe_no", nativeQuery = true)
+    @Query("delete from CafeMenu cm where cm.cafe in (select c from Cafe c where c.cafeNo = :cafe_no)")
     public void deleteByCafeNo(@Param("cafe_no") Long cafe_no);
 
-    @Transactional
-    @Query(value = "select * from cafe_menu where menu_name like %:menuName% and cafe_no = :cafeNo order by menu_no desc",nativeQuery = true)
+    @Query("select cm from CafeMenu cm where cm.menu_name like %:menuName% and cm.cafe in (select c from Cafe c where c.cafeNo = :cafeNo) order by cm.menu_no desc")
     List<CafeMenu> searchList(@Param("cafeNo") Long cafeNo, @Param("menuName") String menuName);
 
 }

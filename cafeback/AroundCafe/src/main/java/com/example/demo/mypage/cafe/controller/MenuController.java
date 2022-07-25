@@ -89,31 +89,13 @@ public class MenuController {
             service.exceptImgModify(info, memNo);
         }
 
-        log.info("modify is complete");
         return "modify complete!!";
     }
 
     @GetMapping("/list/{cafeNo}")
     public List<CafeMenu> menuList(@PathVariable("cafeNo") Integer cafeNo) {
-        log.info("get menu list, member no: " +cafeNo);
-
         return service.list(cafeNo);
     }
-
-//
-//    @GetMapping("/signatureList")
-//    public List<CafeMenu> signatureList() {
-//        log.info("get menu list");
-//
-//        return service.sigList();
-//    }
-//
-//    @GetMapping("/soldOutList")
-//    public List<CafeMenu> soldOutList() {
-//        log.info("get menu list");
-//
-//        return service.soldList();
-//    }
 
     @DeleteMapping("/delete/{menuNo}")
     public void deleteMenu (@PathVariable("menuNo") Integer menuNo) throws IOException {
@@ -136,11 +118,10 @@ public class MenuController {
     }
 
 
-    @GetMapping("/findMenu/{memNo}/{cafe_name}")
-    public List<CafeMenu> findMenu(@PathVariable("memNo")Integer memNo,
+    @GetMapping("/findMenu/{cafeNo}/{cafe_name}")
+    public List<CafeMenu> findMenu(@PathVariable("cafeNo")Integer cafeNo,
                                    @PathVariable("cafe_name")String cafe_name){
-        log.info("find menu memNo -> " + memNo +" cafe name _" + cafe_name);
-        return service.findMenu(memNo, cafe_name);
+        return service.findMenu(cafeNo, cafe_name);
     }
 
 }

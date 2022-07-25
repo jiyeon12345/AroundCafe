@@ -19,16 +19,13 @@ public interface MenuService {
 
     public void delete(Integer menuNo) throws IOException;
 
-    public List<CafeMenu> list1();
 
     public String changeSignature(Integer menuNo);
 
-    public List<CafeMenu> sigList();
 
     public String changeSoldOut(Integer menuNo);
 
 
-    public List<CafeMenu> soldList();
 
-    public List<CafeMenu> findMenu(Integer cafe_no, String cafe_name);
+    public List<CafeMenu> findMenu(Integer cafeNo, String cafe_name);
 }

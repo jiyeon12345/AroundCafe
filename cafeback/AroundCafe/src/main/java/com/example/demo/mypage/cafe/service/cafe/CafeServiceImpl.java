@@ -38,9 +38,6 @@ public class CafeServiceImpl implements CafeService {
     @Autowired
     CafeImgRepository cafeImgRepository;
 
-    @Autowired
-    MenuRepository menuRepository;
-
     @Transactional
     @Override
     public void notIncludeFileModifyCafe(Integer membNo, Cafe info) {
@@ -53,7 +50,6 @@ public class CafeServiceImpl implements CafeService {
     @Transactional
     @Override
     public void includeFileModifyCafe(Long cafeNo, String cafeImg) throws IOException {
-        log.info("***service -> modify yes~ file info : " + cafeNo);
         Cafe cafe = repository.findById(Long.valueOf(cafeNo)).orElseGet(null);
         CafeImgTable img = CafeImgTable.builder()
                 .cafe_img(cafeImg)
@@ -67,14 +63,12 @@ public class CafeServiceImpl implements CafeService {
     @Override
     public void checkSavedImg(Long cafeNo) throws IOException {
         Integer checkImgCount = cafeImgRepository.findByCafe_no(cafeNo).orElseGet(null);
-        log.info("##service -> show cafeImg?" + checkImgCount);
 
         if (checkImgCount > 0) {
-            List<CafeImgTable> findMyImg = cafeImgRepository.findCafe(cafeNo);
+            List<CafeImgTable> findMyImg = cafeImgRepository.CafeImgList(cafeNo);
 
             for (int i = 0; i < findMyImg.size(); i++) {
                 CafeImgTable checkImg = findMyImg.get(i);
-                log.info("** saved img : " + checkImg.getCafe_img());
                 Path filePath = Paths.get("../../cafefront/around_cafe/src/assets/cafe/cafeMypage/" + checkImg.getCafe_img());
                 Files.delete(filePath);
             }
@@ -99,19 +93,14 @@ public class CafeServiceImpl implements CafeService {
     @Override
     public void delete(String cafeNo) throws IOException {
         checkSavedImg(Long.valueOf(cafeNo)); //카페 이미지 테이블에 있는 이미지 삭제 + 테이블 삭제
-        log.info("cafe img : " + cafeNo + "is deleted!!");
-
         repository.deleteById(Long.valueOf(cafeNo));
-        log.info("cafe table is deleted!" + cafeNo);
     }
 
     @Transactional
     @Override
     public Cafe read(Integer cafeNo) {
-        Cafe cafe = repository.findById(Long.valueOf(cafeNo)).orElseGet(null);
-        log.info("cafe info" + cafe);
-
-        return cafe;
+        Cafe cafe = new Cafe();
+        return cafe = repository.findById(Long.valueOf(cafeNo)).orElseGet(null);
     }
     // 태호씨에게 질문
     @Transactional
